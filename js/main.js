@@ -1,38 +1,44 @@
-const quiz = [
-    {
-        questionNumber: '質問1',
-        question: '免許センターがある市は？',
-        answers: [
-            'a.鴻巣',
-            'b.戸田',
-            'c.熊谷',
-            'd.深谷',
-        ],
-        correct: 'a.鴻巣'
-    },
-    {
-        questionNumber: '質問2',
-        question: '高校受験前に受けるテストは？',
-        answers: [
-            'a.北辰テスト',
-            'b.南辰テスト',
-            'c.東辰テスト',
-            'd.西辰テスト',
-        ],
-        correct: 'a.北辰テスト'
-    },
-    {
-        questionNumber: '質問3',
-        question: 'シラコバトをモチーフにしたマスコットキャラは？',
-        answers: [
-            'a.コバコバ',
-            'b.シラバト',
-            'c.コバトン',
-            'd.シラコン',
-        ],
-        correct: 'c.コバトン'
-    },
-]
+// const quiz = [
+//     {
+//         questionNumber: '質問1',
+//         question: '免許センターがある市は？',
+//         answers: [
+//             'a.鴻巣',
+//             'b.戸田',
+//             'c.熊谷',
+//             'd.深谷',
+//         ],
+//         correct: 'a.鴻巣'
+//     },
+//     {
+//         questionNumber: '質問2',
+//         question: '高校受験前に受けるテストは？',
+//         answers: [
+//             'a.北辰テスト',
+//             'b.南辰テスト',
+//             'c.東辰テスト',
+//             'd.西辰テスト',
+//         ],
+//         correct: 'a.北辰テスト'
+//     },
+//     {
+//         questionNumber: '質問3',
+//         question: 'シラコバトをモチーフにしたマスコットキャラは？',
+//         answers: [
+//             'a.コバコバ',
+//             'b.シラバト',
+//             'c.コバトン',
+//             'd.シラコン',
+//         ],
+//         correct: 'c.コバトン'
+//     },
+// ]
+
+// 
+// json読み込み
+//
+import quiz from '/json/quiz.json' assert {type: 'json'};
+console.log(quiz);
 
 let quizCount = 0;
 const quizLength = quiz.length;
@@ -43,7 +49,7 @@ const buttonLength = $button.length
  
 function setupQuiz() {
         $('#js-question')[0].textContent = quiz[quizCount].question
-        $('#js-number')[0].textContent = quiz[quizCount].questionNumber
+        // $('#js-number')[0].textContent = quiz[quizCount].questionNumber
              
         let buttonCount = 0;
  
