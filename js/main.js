@@ -35,53 +35,54 @@ const quiz = [
 ]
 
 let quizCount = 0;
-        const quizLength = quiz.length;
-        let score = 0;
+const quizLength = quiz.length;
+let score = 0;
  
-        const $button = document.querySelectorAll('.answer');
-        const buttonLength = $button.length
+const $button = $('.answer');
+const buttonLength = $button.length
  
-        const setupQuiz = () => {
-            document.getElementById('js-question').textContent = quiz[quizCount].question
-            document.getElementById('js-number').textContent = quiz[quizCount].questionNumber
+function setupQuiz() {
+        $('#js-question')[0].textContent = quiz[quizCount].question
+        $('#js-number')[0].textContent = quiz[quizCount].questionNumber
              
-            let buttonCount = 0;
+        let buttonCount = 0;
  
-            while (buttonCount < buttonLength) {
+        while (buttonCount < buttonLength) {
                 $button[buttonCount].textContent = quiz[quizCount].answers[buttonCount]
                 buttonCount++;
             }
         }
-        setupQuiz();
 
-        let clickedCount = 0;
-        while (clickedCount < buttonLength) {
-            $button[clickedCount].addEventListener("click", function () {
-                const clickedAnswer = event.currentTarget
-                const answerCorrect = document.querySelector('.answer_correct');
-                const answerIncorrect = document.querySelector('.answer_incorrect');
-                const answerResult = document.querySelector('.answer_result');
-                const answerResultText = document.querySelector('.answer_result_text')
+setupQuiz();
+
+let clickedCount = 0;
+while (clickedCount < buttonLength) {
+    $button[clickedCount].addEventListener("click", function () {
+            const clickedAnswer = event.currentTarget
+            const answerCorrect = $('.answer_correct')[0];
+            const answerIncorrect = $('.answer_incorrect')[0];
+            const answerResult = $('.answer_result')[0];
+            const answerResultText = $('.answer_result_text')[0];
  
                 if (quiz[quizCount].correct === clickedAnswer.textContent) {
                     answerCorrect.classList.add("active_answer")
                     setTimeout (function(){
                         answerCorrect.classList.remove("active_answer")
-                    }, 1000);
+                    }, 5000);
                     score++;
                 }
                 else {
                     answerIncorrect.classList.add("active_answer")
                     setTimeout (function(){
                         answerIncorrect.classList.remove("active_answer")
-                    }, 1000);
+                    }, 5000);
                 }
  
                 quizCount++;
                 if (quizCount < quizLength) {
                     setTimeout (function(){
                     setupQuiz();
-                }, 1000);
+                }, 5000);
                 }
                 else {
                     answerResult.classList.add("active_result")

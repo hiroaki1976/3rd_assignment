@@ -112,9 +112,9 @@
   }
    
   .quiz_box .answer_box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 10px;
