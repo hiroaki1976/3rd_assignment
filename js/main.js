@@ -34,9 +34,7 @@
 //     },
 // ]
 
-// 
 // json読み込み
-//
 import quiz from '/json/quiz.json' assert {type: 'json'};
 
 
@@ -66,14 +64,16 @@ setupQuiz();
 let clickedCount = 0;
 while (clickedCount < buttonLength) {
     $button[clickedCount].addEventListener("click", function () {
-            const clickedAnswer = event.currentTarget
+            let clickedAnswer = event.currentTarget.getAttribute('value');
+            console.log(clickedAnswer,'clickedAnswerの値');
             const answerCorrect = $('.answer_correct')[0];
             const answerIncorrect = $('.answer_incorrect')[0];
             const answerResult = $('.answer_result')[0];
             const answerResultText = $('.answer_result_text')[0];
  
-                if (quiz[quizCount].correct === clickedAnswer.textContent) {
+                if (quiz[quizCount].correct_option == clickedAnswer) {
                     answerCorrect.classList.add("active_answer")
+                    $('#correct_se')[0].play();
                     setTimeout (function(){
                         answerCorrect.classList.remove("active_answer")
                     }, 5000);
@@ -81,20 +81,21 @@ while (clickedCount < buttonLength) {
                 }
                 else {
                     answerIncorrect.classList.add("active_answer")
+                    $('#incorrect_se')[0].play();
                     setTimeout (function(){
                         answerIncorrect.classList.remove("active_answer")
                     }, 5000);
                 }
  
                 quizCount++;
-                if (quizCount < quizLength) {
+                if (quizCount <= 11) {
                     setTimeout (function(){
                     setupQuiz();
                 }, 5000);
                 }
                 else {
                     answerResult.classList.add("active_result")
-                    answerResultText.textContent = '終了！あなたの正解数は' + score + '/' + quizLength + 'です！'
+                    answerResultText.textContent = '終了！あなたの正解数は' + score + '/' + 12 + 'です！'
                 }
             });            
             clickedCount++;

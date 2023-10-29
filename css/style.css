@@ -49,7 +49,7 @@
     position: relative;
     width: 100px;
     height: 10px;
-    background-color: blue;
+    background-color: rgba(0, 0, 0, 0);
   }
    
   .quiz_box .answer_incorrect .batu::before {
@@ -58,7 +58,18 @@
     height: 10px;
     background-color: blue;
     content: "";
+    transform: rotate(-45deg);
   }
+
+  .quiz_box .answer_incorrect .batu::after {
+    position: absolute;
+    width: 100px;
+    height: 10px;
+    background-color: blue;
+    content: "";
+    transform: rotate(45deg);
+  }
+
    
   .quiz_box .answer_result {
     position: absolute;

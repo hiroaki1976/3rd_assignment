@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <section class="quiz_box">
+    <div class="quiz_box">
         <div class="answer_correct"><div class="maru"></div></div>
         <div class="answer_incorrect"><div class="batu"></div></div>
         <div class="answer_result">
@@ -18,12 +18,18 @@
         <div class="question_number" id="js-number"></div>
             <h2 class="question" id="js-question"></h2>
         <div class="answer_box">
-            <button class="answer js-answer"></button>
-            <button class="answer js-answer"></button>
-            <button class="answer js-answer"></button>
-            <button class="answer js-answer"></button>
+            <button class="answer js-answer" value="0"></button>
+            <button class="answer js-answer" value="1"></button>
+            <button class="answer js-answer" value="2"></button>
+            <button class="answer js-answer" value="3"></button>
         </div>
-    </section>
+    </div>
+    <audio id="correct_se">
+        <source src="se/Correct_Answer.mp3" type="audio/mp3">
+    </audio>
+    <audio id="incorrect_se">
+        <source src="se/Wrong_Buzzer.mp3" type="audio/mp3">
+    </audio>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- 以下でjson読み込み -->
     <script type="module" src="js/main.js"></script>
