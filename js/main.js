@@ -38,26 +38,28 @@
 // json読み込み
 //
 import quiz from '/json/quiz.json' assert {type: 'json'};
-console.log(quiz);
+
 
 let quizCount = 0;
 const quizLength = quiz.length;
 let score = 0;
  
 const $button = $('.answer');
-const buttonLength = $button.length
+const buttonLength = $button.length;
  
 function setupQuiz() {
-        $('#js-question')[0].textContent = quiz[quizCount].question
+        $('#js-question')[0].textContent = quiz[quizCount].question;
+        console.log(quiz[quizCount]);
         // $('#js-number')[0].textContent = quiz[quizCount].questionNumber
              
         let buttonCount = 0;
  
         while (buttonCount < buttonLength) {
-                $button[buttonCount].textContent = quiz[quizCount].answers[buttonCount]
+                $button[buttonCount].textContent = quiz[quizCount].options[buttonCount];
                 buttonCount++;
             }
         }
+
 
 setupQuiz();
 
