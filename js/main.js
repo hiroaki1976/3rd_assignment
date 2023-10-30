@@ -38,22 +38,23 @@
 import quiz from '/json/quiz.json' assert {type: 'json'};
 
 
-let quizCount = 0;
-const quizLength = quiz.length;
+let quizCount = 0;// 出題数
+let quizNumber;// 問題に番号を割り振る（ランダム出題のため）
+const quizLength = quiz.length;// quizの問題数を取得し、代入
 let score = 0;
  
-const $button = $('.answer');
-const buttonLength = $button.length;
+const $button = $('.answer');// .answerを配列で取得し、代入
+const buttonLength = $button.length;// .answerの数を取得し、代入
  
 function setupQuiz() {
-        $('#js-question')[0].textContent = quiz[quizCount].question;
-        console.log(quiz[quizCount]);
+        quizNumber = Math.floor(Math.random()*79);
+        $('#js-question')[0].textContent = quiz[quizNumber].question;// quizの[quizNumber]番目のquestionを取得し、id="js-question"にそのまま表示させる
         // $('#js-number')[0].textContent = quiz[quizCount].questionNumber
              
         let buttonCount = 0;
  
         while (buttonCount < buttonLength) {
-                $button[buttonCount].textContent = quiz[quizCount].options[buttonCount];
+                $button[buttonCount].textContent = quiz[quizNumber].options[buttonCount];// 
                 buttonCount++;
             }
         }
@@ -71,12 +72,12 @@ while (clickedCount < buttonLength) {
             const answerResult = $('.answer_result')[0];
             const answerResultText = $('.answer_result_text')[0];
  
-                if (quiz[quizCount].correct_option == clickedAnswer) {
+                if (quiz[quizNumber].correct_option == clickedAnswer) {
                     answerCorrect.classList.add("active_answer")
                     $('#correct_se')[0].play();
                     setTimeout (function(){
                         answerCorrect.classList.remove("active_answer")
-                    }, 5000);
+                    }, 3000);
                     score++;
                 }
                 else {
@@ -84,14 +85,14 @@ while (clickedCount < buttonLength) {
                     $('#incorrect_se')[0].play();
                     setTimeout (function(){
                         answerIncorrect.classList.remove("active_answer")
-                    }, 5000);
+                    }, 3000);
                 }
  
                 quizCount++;
                 if (quizCount <= 11) {
                     setTimeout (function(){
                     setupQuiz();
-                }, 5000);
+                }, 3000);
                 }
                 else {
                     answerResult.classList.add("active_result")
