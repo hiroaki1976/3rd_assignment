@@ -10,29 +10,6 @@
 //         ],
 //         correct: 'a.鴻巣'
 //     },
-//     {
-//         questionNumber: '質問2',
-//         question: '高校受験前に受けるテストは？',
-//         answers: [
-//             'a.北辰テスト',
-//             'b.南辰テスト',
-//             'c.東辰テスト',
-//             'd.西辰テスト',
-//         ],
-//         correct: 'a.北辰テスト'
-//     },
-//     {
-//         questionNumber: '質問3',
-//         question: 'シラコバトをモチーフにしたマスコットキャラは？',
-//         answers: [
-//             'a.コバコバ',
-//             'b.シラバト',
-//             'c.コバトン',
-//             'd.シラコン',
-//         ],
-//         correct: 'c.コバトン'
-//     },
-// ]
 
 // json読み込み
 import quiz from '/json/quiz.json' assert {type: 'json'};
@@ -45,32 +22,18 @@ const quizLength = quiz.length;// quizの問題数を取得し、代入
 let score = 0;
  
 const $button = $('.answer');// .answerを配列で取得し、代入
+console.log($button, '$buttonの値');
 const buttonLength = $button.length;// .answerの数を取得し、代入
  
 function setupQuiz() {
         quizNumber = Math.floor(Math.random()*21);
         quizNumberHanger.push(quizNumber);
         console.log(quizNumberHanger);
-        // function isDuplicated(quizNumberHanger) {
-        //     // Setを使って、配列の要素を一意にする
-        //     const setQuizNumberHanger = new Set(quizNumberHanger);
-        //     return setQuizNumberHanger.size !== quizNumberHanger.length;
-        //   }
-        // let test = isDuplicated();
-        // console.log(test);
-          
-        //const array1 = [1, 5, 3, 1, 5, 3];
-        // let quizNumberHanger2 = new Set(quizNumberHanger);
-        // console.log(quizNumberHanger2);
-        // for(i=0; i<=num.length; i++) {
-        //     if(num[i] % 2 == 0) {
-        //         console.log(num[i]);
-        //     } else {
-                
-        //     }
-        // }
+        if (quizNumberHanger.includes(quizNumber)){
+            
+        }
         $('#js-question')[0].textContent = quiz[quizNumber].question;// quizの[quizNumber]番目のquestionを取得し、id="js-question"にそのまま表示させる
-        // $('#js-number')[0].textContent = quiz[quizCount].questionNumber
+        $('#js-number')[0].textContent = '第' + (quizCount + 1) + '問';// 問題数をid="js-number"にそのまま表示させる
              
         let buttonCount = 0;
  
@@ -82,8 +45,10 @@ function setupQuiz() {
 
 // 終了時、一定数の正解以下なら画面を回す関数
 function rotate() {
-    $('#rotate').fadeOut(3000);
+    $('#rotate').fadeOut(5000);
     $('#rotate').css({"transform":"rotateY(0deg)"});
+    $('#rotate').css({"transform":"rotateX(0deg)"});
+    $('#rotate').css({"transform":"rotateZ(0deg)"});
 }
 
 setupQuiz();
@@ -97,7 +62,6 @@ while (clickedCount < buttonLength) {
             const answerIncorrect = $('.answer_incorrect')[0];
             const answerResult = $('.answer_result')[0];
             const answerResultText = $('.answer_result_text')[0];
- 
                 if (quiz[quizNumber].correct_option == clickedAnswer) {
                     answerCorrect.classList.add("active_answer")
                     $('#correct_se')[0].play();
@@ -105,8 +69,7 @@ while (clickedCount < buttonLength) {
                         answerCorrect.classList.remove("active_answer")
                     }, 3000);
                     score++;
-                }
-                else {
+                } else if (quiz[quizNumber].correct_option != clickedAnswer){
                     answerIncorrect.classList.add("active_answer")
                     $('#incorrect_se')[0].play();
                     setTimeout (function(){
@@ -119,11 +82,13 @@ while (clickedCount < buttonLength) {
                     setTimeout (function(){
                     setupQuiz();
                 }, 3000);
-                }
-                else {
+                } else if (score <= 5){
                     answerResult.classList.add("active_result");
                     answerResultText.textContent = '終了！あなたの正解数は' + score + '/' + 12 + 'です！';
                     rotate();
+                } else {
+                    answerResult.classList.add("active_result");
+                    answerResultText.textContent = '終了！あなたの正解数は' + score + '/' + 12 + 'です！';
                 }
             });            
             clickedCount++;
