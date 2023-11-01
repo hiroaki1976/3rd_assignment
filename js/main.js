@@ -40,6 +40,7 @@ import quiz from '/json/quiz.json' assert {type: 'json'};
 
 let quizCount = 0;// 出題数
 let quizNumber;// 問題に番号を割り振る（ランダム出題のため）
+let quizNumberHanger = [];// quizNumberを格納するための空の配列
 const quizLength = quiz.length;// quizの問題数を取得し、代入
 let score = 0;
  
@@ -47,7 +48,27 @@ const $button = $('.answer');// .answerを配列で取得し、代入
 const buttonLength = $button.length;// .answerの数を取得し、代入
  
 function setupQuiz() {
-        quizNumber = Math.floor(Math.random()*79);
+        quizNumber = Math.floor(Math.random()*21);
+        quizNumberHanger.push(quizNumber);
+        console.log(quizNumberHanger);
+        // function isDuplicated(quizNumberHanger) {
+        //     // Setを使って、配列の要素を一意にする
+        //     const setQuizNumberHanger = new Set(quizNumberHanger);
+        //     return setQuizNumberHanger.size !== quizNumberHanger.length;
+        //   }
+        // let test = isDuplicated();
+        // console.log(test);
+          
+        //const array1 = [1, 5, 3, 1, 5, 3];
+        // let quizNumberHanger2 = new Set(quizNumberHanger);
+        // console.log(quizNumberHanger2);
+        // for(i=0; i<=num.length; i++) {
+        //     if(num[i] % 2 == 0) {
+        //         console.log(num[i]);
+        //     } else {
+                
+        //     }
+        // }
         $('#js-question')[0].textContent = quiz[quizNumber].question;// quizの[quizNumber]番目のquestionを取得し、id="js-question"にそのまま表示させる
         // $('#js-number')[0].textContent = quiz[quizCount].questionNumber
              
@@ -59,6 +80,11 @@ function setupQuiz() {
             }
         }
 
+// 終了時、一定数の正解以下なら画面を回す関数
+function rotate() {
+    $('#rotate').fadeOut(3000);
+    $('#rotate').css({"transform":"rotateY(0deg)"});
+}
 
 setupQuiz();
 
@@ -95,8 +121,9 @@ while (clickedCount < buttonLength) {
                 }, 3000);
                 }
                 else {
-                    answerResult.classList.add("active_result")
-                    answerResultText.textContent = '終了！あなたの正解数は' + score + '/' + 12 + 'です！'
+                    answerResult.classList.add("active_result");
+                    answerResultText.textContent = '終了！あなたの正解数は' + score + '/' + 12 + 'です！';
+                    rotate();
                 }
             });            
             clickedCount++;

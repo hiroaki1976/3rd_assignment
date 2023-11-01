@@ -142,4 +142,9 @@
     padding: 10px;
     cursor: pointer;
   }
+
+  #rotate{
+    transition: transform 1.5s;
+    transform: rotateY(360deg);
+  }
   
