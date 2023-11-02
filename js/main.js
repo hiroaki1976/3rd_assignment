@@ -26,22 +26,24 @@ console.log($button, '$buttonの値');
 const buttonLength = $button.length;// .answerの数を取得し、代入
  
 function setupQuiz() {
-        quizNumber = Math.floor(Math.random()*21);
-        quizNumberHanger.push(quizNumber);
-        console.log(quizNumberHanger);
-        if (quizNumberHanger.includes(quizNumber)){
-            
+// まだ出題されていない問題をランダムに選ぶ
+    do {
+        quizNumber = Math.floor(Math.random() * quiz.length);
+    } while (quizNumberHanger.includes(quizNumber));
+    
+    quizNumberHanger.push(quizNumber);// 配列にquizNumberを代入する
+    console.log(quizNumberHanger);
+   
+    $('#js-question')[0].textContent = quiz[quizNumber].question;// quizの[quizNumber]番目のquestionを取得し、id="js-question"にそのまま表示させる
+    $('#js-number')[0].textContent = '第' + (quizCount + 1) + '問';// 問題数をid="js-number"にそのまま表示させる
+         
+    let buttonCount = 0;
+
+    while (buttonCount < buttonLength) {
+            $button[buttonCount].textContent = quiz[quizNumber].options[buttonCount];// 
+            buttonCount++;
         }
-        $('#js-question')[0].textContent = quiz[quizNumber].question;// quizの[quizNumber]番目のquestionを取得し、id="js-question"にそのまま表示させる
-        $('#js-number')[0].textContent = '第' + (quizCount + 1) + '問';// 問題数をid="js-number"にそのまま表示させる
-             
-        let buttonCount = 0;
- 
-        while (buttonCount < buttonLength) {
-                $button[buttonCount].textContent = quiz[quizNumber].options[buttonCount];// 
-                buttonCount++;
-            }
-        }
+    }
 
 // 終了時、一定数の正解以下なら画面を回す関数
 function rotate() {
@@ -67,21 +69,21 @@ while (clickedCount < buttonLength) {
                     $('#correct_se')[0].play();
                     setTimeout (function(){
                         answerCorrect.classList.remove("active_answer")
-                    }, 3000);
+                    }, 4000);
                     score++;
                 } else if (quiz[quizNumber].correct_option != clickedAnswer){
                     answerIncorrect.classList.add("active_answer")
                     $('#incorrect_se')[0].play();
                     setTimeout (function(){
                         answerIncorrect.classList.remove("active_answer")
-                    }, 3000);
+                    }, 4000);
                 }
  
                 quizCount++;
                 if (quizCount <= 11) {
                     setTimeout (function(){
                     setupQuiz();
-                }, 3000);
+                }, 5000);
                 } else if (score <= 5){
                     answerResult.classList.add("active_result");
                     answerResultText.textContent = '終了！あなたの正解数は' + score + '/' + 12 + 'です！';
