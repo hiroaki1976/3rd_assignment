@@ -1,16 +1,3 @@
-// const quiz = [
-//     {
-//         questionNumber: '質問1',
-//         question: '免許センターがある市は？',
-//         answers: [
-//             'a.鴻巣',
-//             'b.戸田',
-//             'c.熊谷',
-//             'd.深谷',
-//         ],
-//         correct: 'a.鴻巣'
-//     },
-
 // json読み込み
 import quiz from '/json/quiz.json' assert {type: 'json'};
 
@@ -40,7 +27,7 @@ function setupQuiz() {
     let buttonCount = 0;
 
     while (buttonCount < buttonLength) {
-            $button[buttonCount].textContent = quiz[quizNumber].options[buttonCount];// 
+            $button[buttonCount].textContent = quiz[quizNumber].options[buttonCount];
             buttonCount++;
         }
     }
